@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Phone, Mail, MessageCircle, Search, Filter, User } from 'lucide-react';
 import { mockContacts } from '../utils/mockData';
@@ -8,7 +7,11 @@ const Contacts: React.FC = () => {
   const [roleFilter, setRoleFilter] = useState('All');
   const [sortBy, setSortBy] = useState('name');
 
-  const roles = ['All', 'Owner', 'Contractor', 'Site Engineer', 'Painter', 'Accountant', 'Site Manager'];
+  const roles = [
+    'All', 'Owner', 'Contractor', 'Site Engineer', 'Painter', 'Accountant', 
+    'Site Manager', 'Electrician', 'Plumber', 'Mason', 'Carpenter', 'Welder', 
+    'Tiles Expert', 'Security Guard', 'Cleaner', 'Steel Worker'
+  ];
 
   // Filter and sort contacts
   const filteredContacts = mockContacts
@@ -62,6 +65,15 @@ const Contacts: React.FC = () => {
       case 'Painter': return 'bg-yellow-100 text-yellow-800';
       case 'Accountant': return 'bg-red-100 text-red-800';
       case 'Site Manager': return 'bg-indigo-100 text-indigo-800';
+      case 'Electrician': return 'bg-orange-100 text-orange-800';
+      case 'Plumber': return 'bg-cyan-100 text-cyan-800';
+      case 'Mason': return 'bg-stone-100 text-stone-800';
+      case 'Carpenter': return 'bg-amber-100 text-amber-800';
+      case 'Welder': return 'bg-gray-100 text-gray-800';
+      case 'Tiles Expert': return 'bg-teal-100 text-teal-800';
+      case 'Security Guard': return 'bg-emerald-100 text-emerald-800';
+      case 'Cleaner': return 'bg-lime-100 text-lime-800';
+      case 'Steel Worker': return 'bg-slate-100 text-slate-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -217,13 +229,13 @@ const Contacts: React.FC = () => {
       {/* Quick Stats */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Contact Statistics</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {roles.slice(1).map((role) => {
             const count = mockContacts.filter(contact => contact.role === role).length;
             return (
               <div key={role} className="text-center">
-                <p className="text-2xl font-bold text-gray-900">{count}</p>
-                <p className="text-sm text-gray-600">{role}{count !== 1 ? 's' : ''}</p>
+                <p className="text-xl font-bold text-gray-900">{count}</p>
+                <p className="text-xs text-gray-600">{role.replace(' ', '\n')}</p>
               </div>
             );
           })}

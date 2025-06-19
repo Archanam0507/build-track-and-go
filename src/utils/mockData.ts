@@ -1,4 +1,3 @@
-
 import { User, Project, DailyUpdate, Blueprint, MaterialLog, Payment, Task, Contact } from '../types';
 
 export const mockUsers: User[] = [
@@ -150,7 +149,8 @@ export const mockContacts: Contact[] = [
     role: 'Owner',
     phone: '+91-9876543210',
     email: 'rajesh@owner.com',
-    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006']
+    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: 'C002',
@@ -158,7 +158,8 @@ export const mockContacts: Contact[] = [
     role: 'Contractor',
     phone: '+91-9876543211',
     email: 'suresh@contractor.com',
-    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006']
+    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: 'C003',
@@ -166,7 +167,8 @@ export const mockContacts: Contact[] = [
     role: 'Site Engineer',
     phone: '+91-9876543212',
     email: 'priya@engineer.com',
-    projects: ['P001', 'P002', 'P005']
+    projects: ['P001', 'P002', 'P005'],
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: 'C004',
@@ -174,7 +176,8 @@ export const mockContacts: Contact[] = [
     role: 'Painter',
     phone: '+91-9876543215',
     email: 'ravi@painter.com',
-    projects: ['P001', 'P003', 'P005']
+    projects: ['P001', 'P003', 'P005'],
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: 'C005',
@@ -182,7 +185,8 @@ export const mockContacts: Contact[] = [
     role: 'Accountant',
     phone: '+91-9876543213',
     email: 'amit@accountant.com',
-    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006']
+    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: 'C006',
@@ -190,7 +194,89 @@ export const mockContacts: Contact[] = [
     role: 'Site Manager',
     phone: '+91-9876543214',
     email: 'vikram@sitemanager.com',
-    projects: ['P001', 'P002', 'P004', 'P006']
+    projects: ['P001', 'P002', 'P004', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C007',
+    name: 'Krishna Electrician',
+    role: 'Electrician',
+    phone: '+91-9876543216',
+    email: 'krishna@electrician.com',
+    projects: ['P001', 'P002', 'P005', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C008',
+    name: 'Lakshmi Plumber',
+    role: 'Plumber',
+    phone: '+91-9876543217',
+    email: 'lakshmi@plumber.com',
+    projects: ['P001', 'P003', 'P004', 'P005'],
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C009',
+    name: 'Mohan Mason',
+    role: 'Mason',
+    phone: '+91-9876543218',
+    email: 'mohan@mason.com',
+    projects: ['P001', 'P002', 'P003', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C010',
+    name: 'Anita Carpenter',
+    role: 'Carpenter',
+    phone: '+91-9876543219',
+    email: 'anita@carpenter.com',
+    projects: ['P001', 'P003', 'P005'],
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C011',
+    name: 'Sunil Welder',
+    role: 'Welder',
+    phone: '+91-9876543220',
+    email: 'sunil@welder.com',
+    projects: ['P002', 'P004', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C012',
+    name: 'Deepa Tiles Expert',
+    role: 'Tiles Expert',
+    phone: '+91-9876543221',
+    email: 'deepa@tiles.com',
+    projects: ['P001', 'P003', 'P005'],
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C013',
+    name: 'Raj Security Guard',
+    role: 'Security Guard',
+    phone: '+91-9876543222',
+    email: 'raj@security.com',
+    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C014',
+    name: 'Geetha Cleaner',
+    role: 'Cleaner',
+    phone: '+91-9876543223',
+    email: 'geetha@cleaner.com',
+    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: 'C015',
+    name: 'Ramesh Steel Worker',
+    role: 'Steel Worker',
+    phone: '+91-9876543224',
+    email: 'ramesh@steel.com',
+    projects: ['P002', 'P004', 'P006'],
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
   }
 ];
 

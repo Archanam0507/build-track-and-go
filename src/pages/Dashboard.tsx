@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import ProjectCard from '../components/ProjectCard';
 import AddProjectModal from '../components/AddProjectModal';
 import { mockProjects } from '../utils/mockData';
 import { Project } from '../types';
-import { Plus, Search, Filter, Bell, TrendingUp, Building2, Users, IndianRupee } from 'lucide-react';
+import { Plus, Search, Filter, Bell, TrendingUp, Building2, Users, IndianRupee, FolderPlus } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
@@ -67,15 +66,26 @@ const Dashboard: React.FC = () => {
           <p className="text-gray-600">Here's what's happening with your projects today.</p>
         </div>
         
-        {canAddProject && (
-          <button
-            onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            <Plus size={20} />
-            <span>Add Project</span>
-          </button>
-        )}
+        <div className="flex space-x-3">
+          {canAddProject && (
+            <>
+              <button
+                onClick={() => setIsAddModalOpen(true)}
+                className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                <FolderPlus size={20} />
+                <span>New Project</span>
+              </button>
+              <button
+                onClick={() => setIsAddModalOpen(true)}
+                className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Plus size={20} />
+                <span>Add Project</span>
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Statistics Cards */}
