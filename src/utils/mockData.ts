@@ -1,0 +1,204 @@
+
+import { User, Project, DailyUpdate, Blueprint, MaterialLog, Payment, Task, Contact } from '../types';
+
+export const mockUsers: User[] = [
+  {
+    id: '1',
+    name: 'Rajesh Kumar',
+    email: 'rajesh@owner.com',
+    phone: '+91-9876543210',
+    role: 'Owner',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: '2',
+    name: 'Suresh Contractor',
+    email: 'suresh@contractor.com',
+    phone: '+91-9876543211',
+    role: 'Contractor',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: '3',
+    name: 'Priya Engineer',
+    email: 'priya@engineer.com',
+    phone: '+91-9876543212',
+    role: 'Engineer',
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: '4',
+    name: 'Amit Accountant',
+    email: 'amit@accountant.com',
+    phone: '+91-9876543213',
+    role: 'Accountant',
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: '5',
+    name: 'Vikram Site Manager',
+    email: 'vikram@sitemanager.com',
+    phone: '+91-9876543214',
+    role: 'Site Manager',
+    avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face'
+  }
+];
+
+export const mockProjects: Project[] = [
+  {
+    id: 'P001',
+    name: 'Luxury Villa - Banjara Hills',
+    description: 'Modern 4BHK villa with swimming pool and garden',
+    status: 'In Progress',
+    progress: 65,
+    startDate: '2024-01-15',
+    endDate: '2024-08-15',
+    budget: 8500000,
+    spent: 5525000,
+    ownerId: '1',
+    contractorId: '2',
+    location: 'Banjara Hills, Hyderabad',
+    lastUpdate: '2024-06-15',
+    category: 'Residential'
+  },
+  {
+    id: 'P002',
+    name: 'Commercial Complex - Gachibowli',
+    description: '3-story commercial building with retail and office spaces',
+    status: 'In Progress',
+    progress: 45,
+    startDate: '2024-02-01',
+    endDate: '2024-12-01',
+    budget: 15000000,
+    spent: 6750000,
+    ownerId: '1',
+    contractorId: '2',
+    location: 'Gachibowli, Hyderabad',
+    lastUpdate: '2024-06-10',
+    category: 'Commercial'
+  },
+  {
+    id: 'P003',
+    name: 'Apartment Complex - Kondapur',
+    description: '2BHK and 3BHK apartments with modern amenities',
+    status: 'Completed',
+    progress: 100,
+    startDate: '2023-08-01',
+    endDate: '2024-03-01',
+    budget: 25000000,
+    spent: 24500000,
+    ownerId: '1',
+    contractorId: '2',
+    location: 'Kondapur, Hyderabad',
+    lastUpdate: '2024-03-01',
+    category: 'Residential'
+  },
+  {
+    id: 'P004',
+    name: 'Industrial Warehouse - Shamshabad',
+    description: 'Large-scale warehouse facility with loading docks',
+    status: 'On Hold',
+    progress: 25,
+    startDate: '2024-03-01',
+    endDate: '2024-10-01',
+    budget: 12000000,
+    spent: 3000000,
+    ownerId: '1',
+    contractorId: '2',
+    location: 'Shamshabad, Hyderabad',
+    lastUpdate: '2024-05-15',
+    category: 'Industrial'
+  },
+  {
+    id: 'P005',
+    name: 'Smart Home - Jubilee Hills',
+    description: 'IoT-enabled luxury home with automation systems',
+    status: 'In Progress',
+    progress: 80,
+    startDate: '2023-12-01',
+    endDate: '2024-07-01',
+    budget: 12500000,
+    spent: 10000000,
+    ownerId: '1',
+    contractorId: '2',
+    location: 'Jubilee Hills, Hyderabad',
+    lastUpdate: '2024-06-18',
+    category: 'Residential'
+  },
+  {
+    id: 'P006',
+    name: 'Shopping Mall - HITEC City',
+    description: 'Multi-level shopping center with food court and entertainment',
+    status: 'In Progress',
+    progress: 35,
+    startDate: '2024-01-01',
+    endDate: '2025-06-01',
+    budget: 50000000,
+    spent: 17500000,
+    ownerId: '1',
+    contractorId: '2',
+    location: 'HITEC City, Hyderabad',
+    lastUpdate: '2024-06-12',
+    category: 'Commercial'
+  }
+];
+
+export const mockContacts: Contact[] = [
+  {
+    id: 'C001',
+    name: 'Rajesh Kumar',
+    role: 'Owner',
+    phone: '+91-9876543210',
+    email: 'rajesh@owner.com',
+    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006']
+  },
+  {
+    id: 'C002',
+    name: 'Suresh Contractor',
+    role: 'Contractor',
+    phone: '+91-9876543211',
+    email: 'suresh@contractor.com',
+    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006']
+  },
+  {
+    id: 'C003',
+    name: 'Priya Engineer',
+    role: 'Site Engineer',
+    phone: '+91-9876543212',
+    email: 'priya@engineer.com',
+    projects: ['P001', 'P002', 'P005']
+  },
+  {
+    id: 'C004',
+    name: 'Ravi Painter',
+    role: 'Painter',
+    phone: '+91-9876543215',
+    email: 'ravi@painter.com',
+    projects: ['P001', 'P003', 'P005']
+  },
+  {
+    id: 'C005',
+    name: 'Amit Accountant',
+    role: 'Accountant',
+    phone: '+91-9876543213',
+    email: 'amit@accountant.com',
+    projects: ['P001', 'P002', 'P003', 'P004', 'P005', 'P006']
+  },
+  {
+    id: 'C006',
+    name: 'Vikram Site Manager',
+    role: 'Site Manager',
+    phone: '+91-9876543214',
+    email: 'vikram@sitemanager.com',
+    projects: ['P001', 'P002', 'P004', 'P006']
+  }
+];
+
+// Mock credentials for testing different roles
+export const mockCredentials = {
+  'rajesh@owner.com': { password: 'owner123', userId: '1' },
+  'suresh@contractor.com': { password: 'contractor123', userId: '2' },
+  'priya@engineer.com': { password: 'engineer123', userId: '3' },
+  'amit@accountant.com': { password: 'accountant123', userId: '4' },
+  'vikram@sitemanager.com': { password: 'sitemanager123', userId: '5' }
+};
