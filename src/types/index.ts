@@ -1,10 +1,9 @@
-
 export interface User {
   id: string;
   name: string;
   email: string;
   phone: string;
-  role: 'Owner' | 'Contractor' | 'Engineer' | 'Accountant' | 'Site Manager';
+  role: 'Owner' | 'Contractor' | 'Engineer' | 'Accountant' | 'Site Manager' | 'Workers';
   avatar?: string;
 }
 

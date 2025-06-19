@@ -40,6 +40,14 @@ export const mockUsers: User[] = [
     phone: '+91-9876543214',
     role: 'Site Manager',
     avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: '6',
+    name: 'Ravi Worker',
+    email: 'ravi@worker.com',
+    phone: '+91-9876543215',
+    role: 'Workers',
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
   }
 ];
 
@@ -286,5 +294,6 @@ export const mockCredentials = {
   'suresh@contractor.com': { password: 'contractor123', userId: '2' },
   'priya@engineer.com': { password: 'engineer123', userId: '3' },
   'amit@accountant.com': { password: 'accountant123', userId: '4' },
-  'vikram@sitemanager.com': { password: 'sitemanager123', userId: '5' }
+  'vikram@sitemanager.com': { password: 'sitemanager123', userId: '5' },
+  'ravi@worker.com': { password: 'worker123', userId: '6' }
 };
