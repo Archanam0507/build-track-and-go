@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
 import AddProjectModal from '../components/AddProjectModal';
 import { mockProjects } from '../utils/mockData';
 import { Project } from '../types';
-import { Plus, Search, Filter, Bell, TrendingUp, Building2, Users, IndianRupee, FolderPlus } from 'lucide-react';
+import { Plus, Search, Filter, Bell, TrendingUp, Building2, Users, IndianRupee } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>(mockProjects);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(mockProjects);
   const [searchTerm, setSearchTerm] = useState('');
@@ -55,6 +57,10 @@ const Dashboard: React.FC = () => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
+  };
+
+  const handleProjectClick = (projectId: string) => {
+    navigate(`/project/${projectId}`);
   };
 
   return (
@@ -169,7 +175,7 @@ const Dashboard: React.FC = () => {
           <ProjectCard
             key={project.id}
             project={project}
-            onClick={() => console.log('View project details:', project.id)}
+            onClick={() => handleProjectClick(project.id)}
           />
         ))}
       </div>

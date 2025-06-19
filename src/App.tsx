@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
@@ -12,6 +11,7 @@ import Payments from './pages/Payments';
 import PaintPicker from './pages/PaintPicker';
 import ProgressTracker from './pages/ProgressTracker';
 import Contacts from './pages/Contacts';
+import ProjectDetails from './pages/ProjectDetails';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isLoading } = useAuth();
@@ -48,6 +48,14 @@ const AppRoutes: React.FC = () => {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/project/:projectId" 
+        element={
+          <ProtectedRoute>
+            <ProjectDetails />
           </ProtectedRoute>
         } 
       />
