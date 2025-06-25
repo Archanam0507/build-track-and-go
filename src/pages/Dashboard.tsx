@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
 import AddProjectModal from '../components/AddProjectModal';
+import StockHealthWidget from '../components/StockHealthWidget';
 import { mockProjects } from '../utils/mockData';
 import { Project } from '../types';
 import { Plus, Search, Filter, Bell, TrendingUp, Building2, Users, IndianRupee } from 'lucide-react';
@@ -128,16 +129,23 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Notifications */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <div className="flex items-center space-x-2">
-          <Bell className="h-5 w-5 text-blue-600" />
-          <h3 className="text-sm font-medium text-blue-800">Recent Notifications</h3>
-        </div>
-        <div className="mt-2 space-y-1">
-          <p className="text-sm text-blue-700">• Payment due for Luxury Villa - Banjara Hills (₹2,50,000)</p>
-          <p className="text-sm text-blue-700">• Smart Home project is 80% complete - milestone reached!</p>
-          <p className="text-sm text-blue-700">• New daily update uploaded for Commercial Complex</p>
+      {/* Stock Health and Notifications Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Stock Health Widget */}
+        <StockHealthWidget />
+
+        {/* Notifications */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-center space-x-2">
+            <Bell className="h-5 w-5 text-blue-600" />
+            <h3 className="text-sm font-medium text-blue-800">Recent Notifications</h3>
+          </div>
+          <div className="mt-2 space-y-1">
+            <p className="text-sm text-blue-700">• Payment due for Luxury Villa - Banjara Hills (₹2,50,000)</p>
+            <p className="text-sm text-blue-700">• Smart Home project is 80% complete - milestone reached!</p>
+            <p className="text-sm text-blue-700">• New daily update uploaded for Commercial Complex</p>
+            <p className="text-sm text-blue-700">• ⚠️ Steel Rods critically low - immediate reorder needed</p>
+          </div>
         </div>
       </div>
 

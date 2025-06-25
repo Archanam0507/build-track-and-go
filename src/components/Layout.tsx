@@ -13,7 +13,8 @@ import {
   Users, 
   LogOut,
   Menu,
-  X
+  X,
+  Warehouse
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -33,6 +34,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     { path: '/daily-updates', label: 'Daily Updates', icon: Camera },
     { path: '/blueprints', label: 'Blueprints', icon: FileText },
     { path: '/materials', label: 'Materials', icon: Package },
+    { path: '/stock-tracker', label: 'Stock Tracker', icon: Warehouse },
     { path: '/payments', label: 'Payments', icon: CreditCard },
     { path: '/paint-picker', label: 'Paint Picker', icon: Palette },
     { path: '/progress-tracker', label: 'Progress Tracker', icon: BarChart3 },

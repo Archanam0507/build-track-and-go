@@ -12,6 +12,7 @@ import PaintPicker from './pages/PaintPicker';
 import ProgressTracker from './pages/ProgressTracker';
 import Contacts from './pages/Contacts';
 import ProjectDetails from './pages/ProjectDetails';
+import StockTracker from './pages/StockTracker';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isLoading } = useAuth();
@@ -80,6 +81,14 @@ const AppRoutes: React.FC = () => {
         element={
           <ProtectedRoute>
             <Materials />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/stock-tracker" 
+        element={
+          <ProtectedRoute>
+            <StockTracker />
           </ProtectedRoute>
         } 
       />
