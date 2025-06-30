@@ -1,3 +1,4 @@
+
 export interface User {
   id: string;
   name: string;
@@ -5,7 +6,7 @@ export interface User {
   phone: string;
   role: 'Contractor' | 'Site Manager' | 'Customer';
   avatar?: string;
-  assignedProjectId?: string; // For Site Manager and Customer roles
+  assignedProjectId?: string; // For Site Manager and Customer roles - exactly one project
 }
 
 export interface Project {
@@ -18,8 +19,9 @@ export interface Project {
   endDate: string;
   budget: number;
   spent: number;
-  ownerId: string;
-  contractorId: string;
+  contractorId: string; // Always the same contractor
+  siteManagerId?: string; // Exactly one site manager per project
+  customerIds: string[]; // One or more customers per project
   location: string;
   lastUpdate: string;
   category: string;

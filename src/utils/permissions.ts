@@ -1,6 +1,7 @@
 
-import { User } from '../types';
+import { User, Project } from '../types';
 
+// Single contractor system - only one contractor has full access
 export const canViewAllProjects = (user: User): boolean => {
   return user.role === 'Contractor';
 };
@@ -20,6 +21,10 @@ export const canDeleteProject = (user: User): boolean => {
 };
 
 export const canManageUsers = (user: User): boolean => {
+  return user.role === 'Contractor';
+};
+
+export const canAssignUsers = (user: User): boolean => {
   return user.role === 'Contractor';
 };
 
@@ -55,7 +60,14 @@ export const canViewDailyUpdates = (user: User, projectId?: string): boolean => 
   return false;
 };
 
-export const getAccessibleProjects = (user: User, allProjects: any[]): any[] => {
+export const canUpdateDailyProgress = (user: User, projectId?: string): boolean => {
+  if (user.role === 'Contractor') return true;
+  if (user.role === 'Site Manager' && user.assignedProjectId === projectId) return true;
+  return false;
+};
+
+// Get projects accessible to the user
+export const getAccessibleProjects = (user: User, allProjects: Project[]): Project[] => {
   if (user.role === 'Contractor') {
     return allProjects;
   }
@@ -67,6 +79,7 @@ export const getAccessibleProjects = (user: User, allProjects: any[]): any[] => 
   return [];
 };
 
+// Navigation items based on role
 export const getNavigationItems = (user: User) => {
   const baseItems = [
     { path: '/', label: 'Dashboard', icon: 'Home', allowedRoles: ['Contractor', 'Site Manager', 'Customer'] }

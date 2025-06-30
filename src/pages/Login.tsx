@@ -28,11 +28,36 @@ const Login: React.FC = () => {
   };
 
   const demoCredentials = [
-    { role: 'Contractor', email: 'rajesh@contractor.com', password: 'contractor123', description: 'Full access to all projects and features' },
-    { role: 'Site Manager', email: 'priya@sitemanager.com', password: 'sitemanager123', description: 'Access to assigned project (P001)' },
-    { role: 'Site Manager', email: 'vikram@sitemanager.com', password: 'sitemanager123', description: 'Access to assigned project (P002)' },
-    { role: 'Customer', email: 'amit@customer.com', password: 'customer123', description: 'Read-only access to project (P001)' },
-    { role: 'Customer', email: 'suresh@customer.com', password: 'customer123', description: 'Read-only access to project (P002)' }
+    { 
+      role: 'Contractor', 
+      email: 'rajesh@contractor.com', 
+      password: 'contractor123', 
+      description: 'Full platform access - Create/manage all projects, assign users, view all data' 
+    },
+    { 
+      role: 'Site Manager', 
+      email: 'priya@sitemanager.com', 
+      password: 'sitemanager123', 
+      description: 'Assigned to Villa Project - Update progress, manage materials, raise payments' 
+    },
+    { 
+      role: 'Site Manager', 
+      email: 'vikram@sitemanager.com', 
+      password: 'sitemanager123', 
+      description: 'Assigned to Commercial Project - Update progress, manage materials, raise payments' 
+    },
+    { 
+      role: 'Customer', 
+      email: 'amit@customer.com', 
+      password: 'customer123', 
+      description: 'Villa Project Owner - View-only access, approve/reject payments' 
+    },
+    { 
+      role: 'Customer', 
+      email: 'suresh@customer.com', 
+      password: 'customer123', 
+      description: 'Commercial Project Owner - View-only access, approve/reject payments' 
+    }
   ];
 
   const fillDemoCredentials = (demoEmail: string, demoPassword: string) => {
@@ -49,7 +74,7 @@ const Login: React.FC = () => {
               <Building2 className="w-8 h-8 text-blue-600" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900">Construction Tracker</h2>
-            <p className="text-gray-600 mt-2">Sign in to your account</p>
+            <p className="text-gray-600 mt-2">Single Contractor Platform</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -110,7 +135,7 @@ const Login: React.FC = () => {
           </form>
 
           <div className="mt-8">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Demo Credentials:</h3>
+            <h3 className="text-sm font-medium text-gray-700 mb-3">Demo Accounts (Single Contractor System):</h3>
             <div className="space-y-2">
               {demoCredentials.map((demo, index) => (
                 <button

@@ -44,6 +44,22 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const navItems = user ? getNavigationItems(user) : [];
 
+  // Get role-specific header info
+  const getRoleInfo = () => {
+    if (!user) return '';
+    
+    switch (user.role) {
+      case 'Contractor':
+        return 'Full Platform Access';
+      case 'Site Manager':
+        return user.assignedProjectId ? `Managing Project: ${user.assignedProjectId}` : 'No Project Assigned';
+      case 'Customer':
+        return user.assignedProjectId ? `Project Owner: ${user.assignedProjectId}` : 'No Project Assigned';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -59,6 +75,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               </button>
               <div className="flex-shrink-0 ml-2 md:ml-0">
                 <h1 className="text-xl font-bold text-blue-600">Construction Tracker</h1>
+                <p className="text-xs text-gray-500">Single Contractor Platform</p>
               </div>
             </div>
             
@@ -72,9 +89,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <div className="hidden sm:block">
                   <p className="text-sm font-medium text-gray-900">{user?.name}</p>
                   <p className="text-xs text-gray-500">{user?.role}</p>
-                  {user?.assignedProjectId && (
-                    <p className="text-xs text-blue-600">Project: {user.assignedProjectId}</p>
-                  )}
+                  <p className="text-xs text-blue-600">{getRoleInfo()}</p>
                 </div>
               </div>
               <button
