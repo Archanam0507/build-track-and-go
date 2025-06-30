@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { getNavigationItems } from '../utils/permissions';
 import { 
   Home, 
   Camera, 
@@ -18,6 +19,18 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
+const iconMap = {
+  Home,
+  Camera,
+  FileText,
+  Package,
+  CreditCard,
+  Palette,
+  BarChart3,
+  Users,
+  Warehouse
+};
+
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, logout } = useAuth();
   const location = useLocation();
@@ -29,17 +42,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     navigate('/login');
   };
 
-  const navItems = [
-    { path: '/', label: 'Dashboard', icon: Home },
-    { path: '/daily-updates', label: 'Daily Updates', icon: Camera },
-    { path: '/blueprints', label: 'Blueprints', icon: FileText },
-    { path: '/materials', label: 'Materials', icon: Package },
-    { path: '/stock-tracker', label: 'Stock Tracker', icon: Warehouse },
-    { path: '/payments', label: 'Payments', icon: CreditCard },
-    { path: '/paint-picker', label: 'Paint Picker', icon: Palette },
-    { path: '/progress-tracker', label: 'Progress Tracker', icon: BarChart3 },
-    { path: '/contacts', label: 'Contacts', icon: Users },
-  ];
+  const navItems = user ? getNavigationItems(user) : [];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -69,6 +72,9 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <div className="hidden sm:block">
                   <p className="text-sm font-medium text-gray-900">{user?.name}</p>
                   <p className="text-xs text-gray-500">{user?.role}</p>
+                  {user?.assignedProjectId && (
+                    <p className="text-xs text-blue-600">Project: {user.assignedProjectId}</p>
+                  )}
                 </div>
               </div>
               <button
@@ -88,7 +94,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="p-4">
             <ul className="space-y-2">
               {navItems.map((item) => {
-                const Icon = item.icon;
+                const Icon = iconMap[item.icon as keyof typeof iconMap];
                 const isActive = location.pathname === item.path;
                 return (
                   <li key={item.path}>

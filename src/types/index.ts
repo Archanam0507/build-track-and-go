@@ -3,8 +3,9 @@ export interface User {
   name: string;
   email: string;
   phone: string;
-  role: 'Owner' | 'Contractor' | 'Engineer' | 'Accountant' | 'Site Manager' | 'Workers';
+  role: 'Contractor' | 'Site Manager' | 'Customer';
   avatar?: string;
+  assignedProjectId?: string; // For Site Manager and Customer roles
 }
 
 export interface Project {

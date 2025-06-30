@@ -4,50 +4,46 @@ export const mockUsers: User[] = [
   {
     id: '1',
     name: 'Rajesh Kumar',
-    email: 'rajesh@owner.com',
+    email: 'rajesh@contractor.com',
     phone: '+91-9876543210',
-    role: 'Owner',
+    role: 'Contractor',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
   },
   {
     id: '2',
-    name: 'Suresh Contractor',
-    email: 'suresh@contractor.com',
-    phone: '+91-9876543211',
-    role: 'Contractor',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
-  },
-  {
-    id: '3',
-    name: 'Priya Engineer',
-    email: 'priya@engineer.com',
+    name: 'Priya Site Manager',
+    email: 'priya@sitemanager.com',
     phone: '+91-9876543212',
-    role: 'Engineer',
+    role: 'Site Manager',
+    assignedProjectId: 'P001',
     avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face'
   },
   {
-    id: '4',
-    name: 'Amit Accountant',
-    email: 'amit@accountant.com',
-    phone: '+91-9876543213',
-    role: 'Accountant',
-    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
-  },
-  {
-    id: '5',
+    id: '3',
     name: 'Vikram Site Manager',
     email: 'vikram@sitemanager.com',
     phone: '+91-9876543214',
     role: 'Site Manager',
+    assignedProjectId: 'P002',
     avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face'
   },
   {
-    id: '6',
-    name: 'Ravi Worker',
-    email: 'ravi@worker.com',
-    phone: '+91-9876543215',
-    role: 'Workers',
+    id: '4',
+    name: 'Amit Customer',
+    email: 'amit@customer.com',
+    phone: '+91-9876543213',
+    role: 'Customer',
+    assignedProjectId: 'P001',
     avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face'
+  },
+  {
+    id: '5',
+    name: 'Suresh Customer',
+    email: 'suresh@customer.com',
+    phone: '+91-9876543215',
+    role: 'Customer',
+    assignedProjectId: 'P002',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
   }
 ];
 
@@ -290,10 +286,9 @@ export const mockContacts: Contact[] = [
 
 // Mock credentials for testing different roles
 export const mockCredentials = {
-  'rajesh@owner.com': { password: 'owner123', userId: '1' },
-  'suresh@contractor.com': { password: 'contractor123', userId: '2' },
-  'priya@engineer.com': { password: 'engineer123', userId: '3' },
-  'amit@accountant.com': { password: 'accountant123', userId: '4' },
-  'vikram@sitemanager.com': { password: 'sitemanager123', userId: '5' },
-  'ravi@worker.com': { password: 'worker123', userId: '6' }
+  'rajesh@contractor.com': { password: 'contractor123', userId: '1' },
+  'priya@sitemanager.com': { password: 'sitemanager123', userId: '2' },
+  'vikram@sitemanager.com': { password: 'sitemanager123', userId: '3' },
+  'amit@customer.com': { password: 'customer123', userId: '4' },
+  'suresh@customer.com': { password: 'customer123', userId: '5' }
 };

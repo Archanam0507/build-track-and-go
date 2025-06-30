@@ -28,11 +28,11 @@ const Login: React.FC = () => {
   };
 
   const demoCredentials = [
-    { role: 'Owner', email: 'rajesh@owner.com', password: 'owner123' },
-    { role: 'Contractor', email: 'suresh@contractor.com', password: 'contractor123' },
-    { role: 'Engineer', email: 'priya@engineer.com', password: 'engineer123' },
-    { role: 'Accountant', email: 'amit@accountant.com', password: 'accountant123' },
-    { role: 'Site Manager', email: 'vikram@sitemanager.com', password: 'sitemanager123' }
+    { role: 'Contractor', email: 'rajesh@contractor.com', password: 'contractor123', description: 'Full access to all projects and features' },
+    { role: 'Site Manager', email: 'priya@sitemanager.com', password: 'sitemanager123', description: 'Access to assigned project (P001)' },
+    { role: 'Site Manager', email: 'vikram@sitemanager.com', password: 'sitemanager123', description: 'Access to assigned project (P002)' },
+    { role: 'Customer', email: 'amit@customer.com', password: 'customer123', description: 'Read-only access to project (P001)' },
+    { role: 'Customer', email: 'suresh@customer.com', password: 'customer123', description: 'Read-only access to project (P002)' }
   ];
 
   const fillDemoCredentials = (demoEmail: string, demoPassword: string) => {
@@ -118,7 +118,9 @@ const Login: React.FC = () => {
                   onClick={() => fillDemoCredentials(demo.email, demo.password)}
                   className="w-full text-left px-3 py-2 text-xs bg-gray-50 hover:bg-gray-100 rounded border text-gray-600 hover:text-gray-800 transition-colors"
                 >
-                  <strong>{demo.role}:</strong> {demo.email} / {demo.password}
+                  <div className="font-semibold text-blue-600">{demo.role}</div>
+                  <div className="text-gray-800">{demo.email} / {demo.password}</div>
+                  <div className="text-gray-500 text-xs mt-1">{demo.description}</div>
                 </button>
               ))}
             </div>
