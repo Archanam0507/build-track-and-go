@@ -185,20 +185,34 @@ const ProjectDetails: React.FC = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <h4 className="font-medium text-gray-900 mb-2">Owner</h4>
-              <div className="flex items-center space-x-2">
-                <User size={16} className="text-gray-400" />
-                <span className="text-gray-600">ID: {project.ownerId}</span>
-              </div>
-            </div>
-            
-            <div>
               <h4 className="font-medium text-gray-900 mb-2">Contractor</h4>
               <div className="flex items-center space-x-2">
                 <User size={16} className="text-gray-400" />
                 <span className="text-gray-600">ID: {project.contractorId}</span>
               </div>
             </div>
+            
+            {project.siteManagerId && (
+              <div>
+                <h4 className="font-medium text-gray-900 mb-2">Site Manager</h4>
+                <div className="flex items-center space-x-2">
+                  <User size={16} className="text-gray-400" />
+                  <span className="text-gray-600">ID: {project.siteManagerId}</span>
+                </div>
+              </div>
+            )}
+
+            {project.customerIds.length > 0 && (
+              <div>
+                <h4 className="font-medium text-gray-900 mb-2">Customer{project.customerIds.length > 1 ? 's' : ''}</h4>
+                {project.customerIds.map((customerId) => (
+                  <div key={customerId} className="flex items-center space-x-2 mb-1">
+                    <User size={16} className="text-gray-400" />
+                    <span className="text-gray-600">ID: {customerId}</span>
+                  </div>
+                ))}
+              </div>
+            )}
 
             <div className="pt-4 border-t">
               <h4 className="font-medium text-gray-900 mb-2">Quick Actions</h4>
