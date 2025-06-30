@@ -35,7 +35,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     { path: '/blueprints', label: 'Blueprints', icon: FileText },
     { path: '/materials', label: 'Materials', icon: Package },
     { path: '/stock-tracker', label: 'Stock Tracker', icon: Warehouse },
-    { path: '/global-stock', label: 'Global Stock', icon: BarChart3 },
     { path: '/payments', label: 'Payments', icon: CreditCard },
     { path: '/paint-picker', label: 'Paint Picker', icon: Palette },
     { path: '/progress-tracker', label: 'Progress Tracker', icon: BarChart3 },
