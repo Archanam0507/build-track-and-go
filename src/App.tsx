@@ -13,6 +13,7 @@ import ProgressTracker from './pages/ProgressTracker';
 import Contacts from './pages/Contacts';
 import ProjectDetails from './pages/ProjectDetails';
 import StockTracker from './pages/StockTracker';
+import GlobalStockTracker from './pages/GlobalStockTracker';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isLoading } = useAuth();
@@ -89,6 +90,14 @@ const AppRoutes: React.FC = () => {
         element={
           <ProtectedRoute>
             <StockTracker />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/global-stock" 
+        element={
+          <ProtectedRoute>
+            <GlobalStockTracker />
           </ProtectedRoute>
         } 
       />

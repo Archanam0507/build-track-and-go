@@ -22,10 +22,10 @@ const StockHealthWidget: React.FC = () => {
           <h3 className="text-lg font-semibold text-gray-900">Stock Health</h3>
         </div>
         <Link 
-          to="/stock-tracker"
+          to="/global-stock"
           className="flex items-center space-x-1 text-blue-600 hover:text-blue-700 text-sm"
         >
-          <span>View All</span>
+          <span>View Global Stock</span>
           <ArrowRight size={16} />
         </Link>
       </div>
