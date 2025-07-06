@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { 
@@ -11,7 +10,7 @@ import { mockProjects } from '../utils/mockData';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 
 const GlobalStockTracker: React.FC = () => {
-  const { user } = useAuth();
+  const { userProfile } = useAuth();
   const [activeTab, setActiveTab] = useState<'overview' | 'transactions' | 'analytics' | 'upload'>('overview');
   const [editingMaterial, setEditingMaterial] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -110,7 +109,7 @@ const GlobalStockTracker: React.FC = () => {
     }
   ]);
 
-  const canEdit = user?.role === 'Contractor' || user?.role === 'Site Manager';
+  const canEdit = userProfile?.role === 'site_manager';
 
   // Calculate alerts
   const alerts: MaterialAlert[] = globalMaterials
@@ -164,7 +163,7 @@ const GlobalStockTracker: React.FC = () => {
       projectId,
       projectName: projectId ? mockProjects.find(p => p.id === projectId)?.name : undefined,
       date: new Date().toISOString().split('T')[0],
-      issuedBy: user?.name || 'Unknown',
+      issuedBy: userProfile?.name || 'Unknown',
       notes: ''
     };
 
