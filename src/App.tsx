@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { Toaster } from './components/ui/toaster';
 import Layout from './components/Layout';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -16,7 +17,7 @@ import ProjectDetails from './pages/ProjectDetails';
 import StockTracker from './pages/StockTracker';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user, isLoading } = useAuth();
+  const { user, userProfile, isLoading } = useAuth();
 
   if (isLoading) {
     return (
@@ -29,7 +30,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
     );
   }
 
-  if (!user) {
+  if (!user || !userProfile) {
     return <Navigate to="/login" replace />;
   }
 
@@ -37,13 +38,24 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 };
 
 const AppRoutes: React.FC = () => {
-  const { user } = useAuth();
+  const { user, userProfile, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Routes>
       <Route 
         path="/login" 
-        element={user ? <Navigate to="/" replace /> : <Login />} 
+        element={user && userProfile ? <Navigate to="/" replace /> : <Login />} 
       />
       <Route 
         path="/" 
@@ -54,7 +66,7 @@ const AppRoutes: React.FC = () => {
         } 
       />
       <Route 
-        path="/project/:projectId" 
+        path="/site/:siteId" 
         element={
           <ProtectedRoute>
             <ProjectDetails />
@@ -135,6 +147,7 @@ const App: React.FC = () => {
     <AuthProvider>
       <Router>
         <AppRoutes />
+        <Toaster />
       </Router>
     </AuthProvider>
   );

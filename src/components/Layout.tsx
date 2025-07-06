@@ -1,8 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { getNavigationItems } from '../utils/permissions';
 import { 
   Home, 
   Camera, 
@@ -17,47 +16,58 @@ import {
   X,
   Warehouse
 } from 'lucide-react';
-import { useState } from 'react';
-
-const iconMap = {
-  Home,
-  Camera,
-  FileText,
-  Package,
-  CreditCard,
-  Palette,
-  BarChart3,
-  Users,
-  Warehouse
-};
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user, logout } = useAuth();
+  const { userProfile, signOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await signOut();
     navigate('/login');
   };
 
-  const navItems = user ? getNavigationItems(user) : [];
+  // Navigation items based on role
+  const getNavigationItems = () => {
+    const baseItems = [
+      { path: '/', label: 'Dashboard', icon: Home }
+    ];
+
+    const allItems = [
+      { path: '/daily-updates', label: 'Daily Updates', icon: Camera },
+      { path: '/blueprints', label: 'Blueprints', icon: FileText },
+      { path: '/materials', label: 'Materials', icon: Package },
+      { path: '/stock-tracker', label: 'Stock Tracker', icon: Warehouse },
+      { path: '/payments', label: 'Payments', icon: CreditCard },
+      { path: '/paint-picker', label: 'Paint Picker', icon: Palette },
+      { path: '/progress-tracker', label: 'Progress Tracker', icon: BarChart3 },
+      { path: '/contacts', label: 'Contacts', icon: Users }
+    ];
+
+    // All users can access all features, but with different permissions
+    return [...baseItems, ...allItems];
+  };
+
+  const navItems = getNavigationItems();
 
   // Get role-specific header info
   const getRoleInfo = () => {
-    if (!user) return '';
+    if (!userProfile) return '';
     
-    switch (user.role) {
-      case 'Contractor':
+    switch (userProfile.role) {
+      case 'site_manager':
         return 'Full Platform Access';
-      case 'Site Manager':
-        return user.assignedProjectId ? `Managing Project: ${user.assignedProjectId}` : 'No Project Assigned';
-      case 'Customer':
-        return user.assignedProjectId ? `Project Owner: ${user.assignedProjectId}` : 'No Project Assigned';
+      case 'owner':
+        return userProfile.assigned_site ? `Site Owner: ${userProfile.assigned_site}` : 'No Site Assigned';
       default:
         return '';
     }
+  };
+
+  const getRoleName = () => {
+    if (!userProfile) return '';
+    return userProfile.role === 'site_manager' ? 'Site Manager' : 'Land Owner';
   };
 
   return (
@@ -75,26 +85,27 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               </button>
               <div className="flex-shrink-0 ml-2 md:ml-0">
                 <h1 className="text-xl font-bold text-blue-600">Construction Tracker</h1>
-                <p className="text-xs text-gray-500">Single Contractor Platform</p>
+                <p className="text-xs text-gray-500">Professional Site Management</p>
               </div>
             </div>
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <img
-                  className="h-8 w-8 rounded-full"
-                  src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name}&background=3b82f6&color=fff`}
-                  alt={user?.name}
+                  className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center"
+                  src={`https://ui-avatars.com/api/?name=${userProfile?.name}&background=3b82f6&color=fff`}
+                  alt={userProfile?.name}
                 />
                 <div className="hidden sm:block">
-                  <p className="text-sm font-medium text-gray-900">{user?.name}</p>
-                  <p className="text-xs text-gray-500">{user?.role}</p>
+                  <p className="text-sm font-medium text-gray-900">{userProfile?.name}</p>
+                  <p className="text-xs text-gray-500">{getRoleName()}</p>
                   <p className="text-xs text-blue-600">{getRoleInfo()}</p>
                 </div>
               </div>
               <button
                 onClick={handleLogout}
                 className="p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-md"
+                title="Sign out"
               >
                 <LogOut size={20} />
               </button>
@@ -109,7 +120,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="p-4">
             <ul className="space-y-2">
               {navItems.map((item) => {
-                const Icon = iconMap[item.icon as keyof typeof iconMap];
+                const Icon = item.icon;
                 const isActive = location.pathname === item.path;
                 return (
                   <li key={item.path}>

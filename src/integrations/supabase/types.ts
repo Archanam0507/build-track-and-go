@@ -9,7 +9,436 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      blueprints: {
+        Row: {
+          created_at: string | null
+          file_url: string | null
+          id: string
+          site_id: string | null
+          type: string | null
+          uploaded_by: string | null
+          version: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          file_url?: string | null
+          id?: string
+          site_id?: string | null
+          type?: string | null
+          uploaded_by?: string | null
+          version?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          file_url?: string | null
+          id?: string
+          site_id?: string | null
+          type?: string | null
+          uploaded_by?: string | null
+          version?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blueprints_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blueprints_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contacts: {
+        Row: {
+          id: string
+          name: string | null
+          phone: string | null
+          role: string | null
+          site_id: string | null
+          whatsapp: boolean | null
+        }
+        Insert: {
+          id?: string
+          name?: string | null
+          phone?: string | null
+          role?: string | null
+          site_id?: string | null
+          whatsapp?: boolean | null
+        }
+        Update: {
+          id?: string
+          name?: string | null
+          phone?: string | null
+          role?: string | null
+          site_id?: string | null
+          whatsapp?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contacts_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      daily_updates: {
+        Row: {
+          captions: string | null
+          category: string | null
+          created_at: string | null
+          date: string | null
+          id: string
+          media_urls: string[] | null
+          site_id: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          captions?: string | null
+          category?: string | null
+          created_at?: string | null
+          date?: string | null
+          id?: string
+          media_urls?: string[] | null
+          site_id?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          captions?: string | null
+          category?: string | null
+          created_at?: string | null
+          date?: string | null
+          id?: string
+          media_urls?: string[] | null
+          site_id?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_updates_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "daily_updates_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      materials_log: {
+        Row: {
+          created_at: string | null
+          id: string
+          item: string | null
+          quantity: number | null
+          receipt_url: string | null
+          site_id: string | null
+          stage_tag: string | null
+          unit_price: number | null
+          vendor: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          item?: string | null
+          quantity?: number | null
+          receipt_url?: string | null
+          site_id?: string | null
+          stage_tag?: string | null
+          unit_price?: number | null
+          vendor?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          item?: string | null
+          quantity?: number | null
+          receipt_url?: string | null
+          site_id?: string | null
+          stage_tag?: string | null
+          unit_price?: number | null
+          vendor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "materials_log_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      paint_picker: {
+        Row: {
+          before_after: string[] | null
+          created_at: string | null
+          day_night: string | null
+          grill_color: string | null
+          id: string
+          image_url: string | null
+          site_id: string | null
+          trim_color: string | null
+          wall_color: string | null
+        }
+        Insert: {
+          before_after?: string[] | null
+          created_at?: string | null
+          day_night?: string | null
+          grill_color?: string | null
+          id?: string
+          image_url?: string | null
+          site_id?: string | null
+          trim_color?: string | null
+          wall_color?: string | null
+        }
+        Update: {
+          before_after?: string[] | null
+          created_at?: string | null
+          day_night?: string | null
+          grill_color?: string | null
+          id?: string
+          image_url?: string | null
+          site_id?: string | null
+          trim_color?: string | null
+          wall_color?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "paint_picker_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number | null
+          approved_by: string | null
+          created_at: string | null
+          id: string
+          payee_details: string | null
+          proof_url: string | null
+          raised_by: string | null
+          site_id: string | null
+          status: string | null
+          type: string | null
+        }
+        Insert: {
+          amount?: number | null
+          approved_by?: string | null
+          created_at?: string | null
+          id?: string
+          payee_details?: string | null
+          proof_url?: string | null
+          raised_by?: string | null
+          site_id?: string | null
+          status?: string | null
+          type?: string | null
+        }
+        Update: {
+          amount?: number | null
+          approved_by?: string | null
+          created_at?: string | null
+          id?: string
+          payee_details?: string | null
+          proof_url?: string | null
+          raised_by?: string | null
+          site_id?: string | null
+          status?: string | null
+          type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_raised_by_fkey"
+            columns: ["raised_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      progress_tasks: {
+        Row: {
+          comments: string | null
+          dependencies: string[] | null
+          end_date: string | null
+          id: string
+          name: string | null
+          progress: number | null
+          site_id: string | null
+          start_date: string | null
+          status: string | null
+        }
+        Insert: {
+          comments?: string | null
+          dependencies?: string[] | null
+          end_date?: string | null
+          id?: string
+          name?: string | null
+          progress?: number | null
+          site_id?: string | null
+          start_date?: string | null
+          status?: string | null
+        }
+        Update: {
+          comments?: string | null
+          dependencies?: string[] | null
+          end_date?: string | null
+          id?: string
+          name?: string | null
+          progress?: number | null
+          site_id?: string | null
+          start_date?: string | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progress_tasks_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sites: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          id: string
+          last_update: string | null
+          location: string | null
+          name: string
+          progress: number | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          last_update?: string | null
+          location?: string | null
+          name: string
+          progress?: number | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          last_update?: string | null
+          location?: string | null
+          name?: string
+          progress?: number | null
+          status?: string | null
+        }
+        Relationships: []
+      }
+      stock_tracker: {
+        Row: {
+          id: string
+          item: string | null
+          last_updated: string | null
+          quantity: number | null
+          restock_note: string | null
+          site_id: string | null
+          status: string | null
+        }
+        Insert: {
+          id?: string
+          item?: string | null
+          last_updated?: string | null
+          quantity?: number | null
+          restock_note?: string | null
+          site_id?: string | null
+          status?: string | null
+        }
+        Update: {
+          id?: string
+          item?: string | null
+          last_updated?: string | null
+          quantity?: number | null
+          restock_note?: string | null
+          site_id?: string | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stock_tracker_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          assigned_site: string | null
+          created_at: string | null
+          email: string
+          id: string
+          name: string
+          phone: string | null
+          role: string
+        }
+        Insert: {
+          assigned_site?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          name: string
+          phone?: string | null
+          role: string
+        }
+        Update: {
+          assigned_site?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_assigned_site_fkey"
+            columns: ["assigned_site"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

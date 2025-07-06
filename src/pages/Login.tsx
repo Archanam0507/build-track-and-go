@@ -1,68 +1,42 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Eye, EyeOff, Building2, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, Building2, Mail, Lock, UserPlus } from 'lucide-react';
 
 const Login: React.FC = () => {
+  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [role, setRole] = useState<'site_manager' | 'owner'>('owner');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const [success, setSuccess] = useState('');
+  const { signIn, signUp, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setIsLoading(true);
+    setSuccess('');
 
-    const success = await login(email, password);
-    if (success) {
-      navigate('/');
+    if (isSignUp) {
+      const result = await signUp(email, password, name, role);
+      if (result.error) {
+        setError(result.error);
+      } else {
+        setSuccess('Account created successfully! Please check your email to verify your account.');
+        setIsSignUp(false);
+      }
     } else {
-      setError('Invalid email or password');
+      const result = await signIn(email, password);
+      if (result.error) {
+        setError(result.error);
+      } else {
+        navigate('/');
+      }
     }
-    setIsLoading(false);
-  };
-
-  const demoCredentials = [
-    { 
-      role: 'Contractor', 
-      email: 'rajesh@contractor.com', 
-      password: 'contractor123', 
-      description: 'Full platform access - Create/manage all projects, assign users, view all data' 
-    },
-    { 
-      role: 'Site Manager', 
-      email: 'priya@sitemanager.com', 
-      password: 'sitemanager123', 
-      description: 'Assigned to Villa Project - Update progress, manage materials, raise payments' 
-    },
-    { 
-      role: 'Site Manager', 
-      email: 'vikram@sitemanager.com', 
-      password: 'sitemanager123', 
-      description: 'Assigned to Commercial Project - Update progress, manage materials, raise payments' 
-    },
-    { 
-      role: 'Customer', 
-      email: 'amit@customer.com', 
-      password: 'customer123', 
-      description: 'Villa Project Owner - View-only access, approve/reject payments' 
-    },
-    { 
-      role: 'Customer', 
-      email: 'suresh@customer.com', 
-      password: 'customer123', 
-      description: 'Commercial Project Owner - View-only access, approve/reject payments' 
-    }
-  ];
-
-  const fillDemoCredentials = (demoEmail: string, demoPassword: string) => {
-    setEmail(demoEmail);
-    setPassword(demoPassword);
   };
 
   return (
@@ -74,10 +48,59 @@ const Login: React.FC = () => {
               <Building2 className="w-8 h-8 text-blue-600" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900">Construction Tracker</h2>
-            <p className="text-gray-600 mt-2">Single Contractor Platform</p>
+            <p className="text-gray-600 mt-2">Professional Site Management</p>
+          </div>
+
+          <div className="flex mb-6">
+            <button
+              type="button"
+              onClick={() => {
+                setIsSignUp(false);
+                setError('');
+                setSuccess('');
+              }}
+              className={`flex-1 py-2 px-4 text-sm font-medium rounded-l-md ${
+                !isSignUp 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setIsSignUp(true);
+                setError('');
+                setSuccess('');
+              }}
+              className={`flex-1 py-2 px-4 text-sm font-medium rounded-r-md ${
+                isSignUp 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Sign Up
+            </button>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {isSignUp && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Enter your full name"
+                />
+              </div>
+            )}
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address
@@ -119,37 +142,49 @@ const Login: React.FC = () => {
               </div>
             </div>
 
+            {isSignUp && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Role
+                </label>
+                <select
+                  value={role}
+                  onChange={(e) => setRole(e.target.value as 'site_manager' | 'owner')}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="owner">Land Owner</option>
+                  <option value="site_manager">Site Manager</option>
+                </select>
+              </div>
+            )}
+
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
                 {error}
               </div>
             )}
 
+            {success && (
+              <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+                {success}
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              ) : (
+                <>
+                  {isSignUp ? <UserPlus className="w-5 h-5 mr-2" /> : <Mail className="w-5 h-5 mr-2" />}
+                  {isSignUp ? 'Create Account' : 'Sign In'}
+                </>
+              )}
             </button>
           </form>
-
-          <div className="mt-8">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Demo Accounts (Single Contractor System):</h3>
-            <div className="space-y-2">
-              {demoCredentials.map((demo, index) => (
-                <button
-                  key={index}
-                  onClick={() => fillDemoCredentials(demo.email, demo.password)}
-                  className="w-full text-left px-3 py-2 text-xs bg-gray-50 hover:bg-gray-100 rounded border text-gray-600 hover:text-gray-800 transition-colors"
-                >
-                  <div className="font-semibold text-blue-600">{demo.role}</div>
-                  <div className="text-gray-800">{demo.email} / {demo.password}</div>
-                  <div className="text-gray-500 text-xs mt-1">{demo.description}</div>
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </div>
